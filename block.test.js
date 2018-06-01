@@ -9,7 +9,7 @@ describe('Block', () => {
     beforeEach(() => {
         data = 'bar';
         lastBlock = Block.genesis();
-        block = Block.mineBlock(Block.genesis());
+        block = Block.mineBlock(lastBlock, data);
     });
 
     it('sets the `data` to match the input', () => {
