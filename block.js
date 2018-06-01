@@ -20,7 +20,7 @@ class Block {
     toString() {
         return `Block -
             Timestamp: ${this.timestamp}
-            Last Hash: ${this.lastHash.substring(0,10)}
+            Last Hash: ${this.lastHash.substring(0, 10)}
             Hash     : ${this.hash.substring(0, 10)}
             Data     : ${this.data}`;
     }
@@ -46,6 +46,14 @@ class Block {
 
     static hash(timestamp, lastHash, data) {
         return SHA256(`${timestamp}${lastHash}{data}`).toString();
+    }
+
+    static blockHash(block) {
+        /*
+            recalculates the existing an existing block's hash
+        */
+        const { timestamp, lastHash, data } = block;
+        return Block.hash(timestamp, lastHash, data);
     }
 }
 
