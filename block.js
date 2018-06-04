@@ -45,12 +45,12 @@ class Block {
     }
 
     static hash(timestamp, lastHash, data) {
-        return SHA256(`${timestamp}${lastHash}{data}`).toString();
+        return SHA256(`${timestamp}${lastHash}${data}`).toString();
     }
 
     static blockHash(block) {
         /*
-            recalculates the existing an existing block's hash
+            recalculates the an existing block's hash
         */
         const { timestamp, lastHash, data } = block;
         return Block.hash(timestamp, lastHash, data);
