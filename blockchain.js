@@ -9,14 +9,11 @@ class Blockchain {
     /*
         adds the new block to the chain
     */
-    //const lastBlock = this.chain[this.chain.length - 1];
+    const lastBlock = this.chain[this.chain.length - 1];
     const block = Block.mineBlock(this.chain[this.chain.length - 1], data);
     this.chain.push(block);
   }
-  /*
-      In order to support multiple contributors to the blockchain, we need to
-      add a function taht checks the validity of multiple chains.
-  */
+
   isValidChain(chain) {
     /*
         checks the validity of an incoming chain
@@ -37,6 +34,28 @@ class Blockchain {
         return false;
     }
     return true;
+  }
+
+  replaceChain(newChain) {
+    /*
+        replaces current chain with the incoming blockchain i it is valid
+    */
+    if (newChain.length <= this.chain.length) {
+      /*
+        chains of the same length are likely to be the same chain anyway,
+        this also resolves forking issues involved with chain validation
+      */
+      console.log('chain received is not longer than the current chain');
+      return;
+    }
+    
+    if (!this.isValidChain(newChain)) {
+      console.log('the received chain is not valid');
+      return;
+    }
+
+    console.log('Replacing blockchain with the new chain');
+    this.chain = newChain;
   }
 }
 
